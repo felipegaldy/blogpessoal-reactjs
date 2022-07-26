@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
+import Home from './pages/home/home';
 
 let nome = 'Felipe'
 function App() {
   return (
-    <h1>{nome}</h1>
+    <>
+    <Home/>
+    </>
   );
 }
 
