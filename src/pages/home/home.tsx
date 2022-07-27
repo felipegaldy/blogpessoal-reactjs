@@ -1,24 +1,25 @@
 import React from "react";
-import "./home.css";
-import { Grid, Paper } from "@material-ui/core";
+import { Button, Paper } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 
 function Home() {
     return(
         <>
-        <Grid container spacing={2} >
-            <Grid item xs={12} sm={8}>
-                <Paper style={{height:"100vh", background:"lightblue"}}   />
-            </Grid>
-            <Grid item container spacing={2} direction="column" xs={12} sm={4}>
-                <Grid item>
-                    <Paper style={{height:"49vh", background:"orange"}} />
-                </Grid>
-                <Grid item>
-                    <Paper style={{height: "49vh", background:"green"}} />
-                </Grid>
-            </Grid>    
-        </Grid>
+            <Paper >
+                <Box p={2}>
+                    <Box display="flex" justifyContent="center" >
+                        <h1>Hello world!</h1>
+                    </Box>
+                    <img src="https://obc.com.tr/wp-content/uploads/2019/01/banner-software-development.png" alt="developer-icon"
+                    style={{width: "100%", height: "100%"}}
+                    />
+                    <Box display="flex" justifyContent="center" p={2}>
+                        <Button variant="contained" color="primary">Botao 1</Button>
+                        <Button variant="contained" color="secondary">Botao 2</Button>
+                    </Box>
+                </Box>
+            </Paper>
         </>
     );
 }
