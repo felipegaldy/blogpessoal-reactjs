@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <div style={{minHeight: "70vh"}}>
         <Routes>
-          {/*<Route exact path='/' element={<Login />} /> */}
+          <Route path='/' element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/cadastrar' element={<CadastroUsuario />} />
