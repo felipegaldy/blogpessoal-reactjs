@@ -1,0 +1,24 @@
+a {
+    text-decoration: none;
+}
+
+.box1{
+    background-color: #223;
+    height: 100px;
+}
+
+.sociais {
+    font-size: 45px;
+    margin-right: 20px;
+    color: whitesmoke;
+}
+
+.textos {
+    color: white;
+}
+
+.box2{
+    background-color: #223;
+    height: 50px;
+    padding: 10px;
+}
