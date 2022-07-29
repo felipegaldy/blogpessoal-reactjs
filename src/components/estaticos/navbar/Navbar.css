@@ -1,3 +1,14 @@
+.cursor {
+    cursor: pointer;
+    color: white;
+}
+
 .text-decorator-none{
     text-decoration: none;
+}
+
+.toolbar {
+    background-color: #222;
+    display: flex;
+    justify-content: space-between;
 }
