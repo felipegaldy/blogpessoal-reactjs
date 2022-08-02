@@ -4,8 +4,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import CategoryIcon from "@material-ui/icons/Category";
 import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
+import PersonIcon from '@material-ui/icons/Person';
 import ".//Navbar.css";
 
 function Navbar() {
@@ -52,8 +52,8 @@ function Navbar() {
             <Box mx={1} className="cursor">
               <Link to="/login" className="text-decorator-none cursor">
                 <Typography variant="h6" color="inherit">
-                  <ExitToAppIcon color="inherit" fontSize="large" />
-                  {/*LOGOUT*/}
+                  <PersonIcon color="inherit" fontSize="large" />
+                  {/*LOGIN*/}
                 </Typography>
               </Link>
             </Box>
