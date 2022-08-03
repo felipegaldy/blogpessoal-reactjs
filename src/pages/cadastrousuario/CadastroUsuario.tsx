@@ -42,15 +42,37 @@ function CadastroUsuario() {
 
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (confirmarSenha == user.senha) {
-      cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult);
-      alert("Usuario cadastrado com sucesso");
+
+    // Estrutura Condicional que verifica se as senhas batem e se a Senha tem mais de 8 caracteres
+    if (confirmarSenha === user.senha && user.senha.length >= 8) {
+      //Tenta executar o cadastro
+      try {
+        await cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult);
+        alert("Usuário cadastrado com sucesso");
+
+        //Se houver erro, pegue o Erro e retorna uma msg
+      } catch (error) {
+        console.log(`Error: ${error}`);
+
+        //Pode modificar a msg de acordo com o erro
+        alert("Usuário já existente");
+      }
+    } else if (confirmarSenha !== user.senha) {
+      alert("As senhas não combinam."); // Mensagem que indica que as senham nao são iguai
+
+      // Reinicia o campo de Confirmar Senha
     } else {
-      alert(
-        "Dados inconsistentes. Favor verificar as informações de cadastro."
-      );
+      alert("Insira no miníno 8 caracteres na senha."); // Mensagem que indica a quantidade minima de caracteres
+      setUser({ ...user, senha: "" }); // Reinicia o campo de Senha
+      setConfirmarSenha("");
     }
   }
+
+  /*
+    = : atribuição (valor = 9)
+    == : op. aritmetico (valor == 9.0)
+    === : op. idêntico (valor === 9.0)
+*/
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -85,6 +107,16 @@ function CadastroUsuario() {
               label="Usuário"
               variant="outlined"
               name="usuario"
+              margin="normal"
+              fullWidth
+            />
+            <TextField
+              onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)}
+              value={user.foto}
+              id="foto"
+              label="Foto"
+              variant="outlined"
+              name="foto"
               margin="normal"
               fullWidth
             />
