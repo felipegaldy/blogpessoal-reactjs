@@ -61,10 +61,12 @@ function Navbar() {
             </Link>
             </Box>
             <Box mx={1} className="cursor">
+            <Link to="/formularioTema" className="text-decorator-none cursor">
               <Typography variant="h6" color="inherit">
                 <CreateNewFolderIcon color="inherit" fontSize="large" />
                 {/*CADASTRAR TEMAS*/}
               </Typography>
+            </Link>
             </Box>
             <Box mx={1} className="cursor">
               <Link to="/login" className="text-decorator-none cursor">
