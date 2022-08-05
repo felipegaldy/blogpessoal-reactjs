@@ -1,9 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import {Typography, Button, Box, Card, CardActions, CardContent } from "@material-ui/core"
 import './DeletarPostagem.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import useLocalStorage from 'react-use-localstorage';
+import Postagem from '../../../model/Postagem';
+import { buscaId, deleteId } from '../../../services/Service';
 
 
 function DeletarPostagem() {
+
+  let navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); // id do tema a ser editado
+  const [token, setToken] = useLocalStorage("token");
+
+  const [post, setPosts] = useState<Postagem>();
+
+  useEffect(() => {
+    if(token == ""){
+        alert("Você precisa estar logado para acessar essa página");
+        navigate("/login");
+    }
+    }, [token]);
+
+    useEffect(() => {
+        if(id != undefined){
+            findById(id);
+        }
+    }, [id]);
+
+    const findById = async (id: string) => {
+        //adicionar try catch
+        buscaId(`/postagem/${id}`, setPosts, {
+            headers: {
+                'Authorization': token
+            }
+        })
+    };
+
+    const sim = () => {
+        navigate("/posts");
+        deleteId(`/postagem/${id}`, {
+            headers: {
+                'Authorization': token
+            }
+        });
+        alert("Postagem deletada com sucesso");
+    }
+    const nao = () => {
+        navigate("/posts");
+    }
    
   return (
     <>
@@ -15,7 +60,7 @@ function DeletarPostagem() {
                 Deseja deletar a Postagem:
               </Typography>
               <Typography color="textSecondary" >
-              Tema
+                {post?.titulo}
               </Typography>
             </Box>
 
@@ -23,12 +68,12 @@ function DeletarPostagem() {
           <CardActions>
             <Box display="flex" justifyContent="start" ml={1.0} mb={2} >
               <Box mx={2}>
-              <Button  variant="contained" className="marginLeft" size='large' color="primary">
+              <Button onClick={sim} variant="contained" className="marginLeft" size='large' color="primary">
                 Sim
               </Button>
               </Box>
               <Box>
-              <Button   variant="contained" size='large' color="secondary">
+              <Button onClick={nao}  variant="contained" size='large' color="secondary">
                 Não
               </Button>
               </Box>
