@@ -21,6 +21,7 @@ function ListaTema() {
   }, [token]);
 
   const getTemas = async () => {
+    //adicionar try catch
     await busca("/tema", setTemas, {
     headers: {
       'Authorization':  token

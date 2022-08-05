@@ -34,6 +34,7 @@ function CadastroTema() {
     }, [id]);
 
     const findById = async (id: string) => {
+        //adicionar try catch
         buscaId(`/tema/${id}`, setTema, {
             headers: {
                 'Authorization': token

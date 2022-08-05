@@ -21,6 +21,8 @@ function ListaPostagem() {
   } , [token]);
 
   const getPostagens = async () => {
+
+    //adicionar try catch
     await busca("/postagem", setPostagens, {
     headers: {
       'Authorization':  token

@@ -1,11 +1,55 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import {Box, Card, CardActions, CardContent, Button, Typography} from '@material-ui/core';
 import './DeletarTema.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import useLocalStorage from 'react-use-localstorage';
+import { buscaId, deleteId } from '../../../services/Service';
+import Tema from '../../../model/Tema';
 
 
 
 function DeletarTema() {
-  
+  let navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); // id do tema a ser editado
+  const [token, setToken] = useLocalStorage("token");
+
+  const [tema, setTema] = useState<Tema>();
+
+  useEffect(() => {
+    if(token == ""){
+        alert("Você precisa estar logado para acessar essa página");
+        navigate("/login");
+    }
+    }, [token]);
+
+    useEffect(() => {
+        if(id != undefined){
+            findById(id);
+        }
+    }, [id]);
+
+    const findById = async (id: string) => {
+        //adicionar try catch
+        buscaId(`/tema/${id}`, setTema, {
+            headers: {
+                'Authorization': token
+            }
+        })
+    };
+
+    const sim = () => {
+        navigate("/temas");
+        deleteId(`/tema/${id}`, {
+            headers: {
+                'Authorization': token
+            }
+        });
+        alert("Tema deletado com sucesso");
+    }
+    const nao = () => {
+        navigate("/temas");
+    }
+
           
   return (
     <>
@@ -17,19 +61,19 @@ function DeletarTema() {
                 Deseja deletar o Tema:
               </Typography>
               <Typography color="textSecondary">
-                tema
+                {tema?.categoria}
               </Typography>
             </Box>
           </CardContent>
           <CardActions>
             <Box display="flex" justifyContent="start" ml={1.0} mb={2} >
               <Box mx={2}>
-                <Button variant="contained" className="marginLeft" size='large' color="primary">
+                <Button onClick={sim} variant="contained" className="marginLeft" size='large' color="primary">
                   Sim
                 </Button>
               </Box>
               <Box mx={2}>
-                <Button variant="contained" size='large' color="secondary">
+                <Button onClick={nao} variant="contained" size='large' color="secondary">
                   Não
                 </Button>
               </Box>
