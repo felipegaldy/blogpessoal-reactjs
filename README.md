@@ -28,16 +28,12 @@
 	 - **rafce** cria um componente de função com arrowfunction com exportaçao;
 
 
-## 📕Instalação
-
-### Criando/Instalando o React
-```
-npm install -g create-react-app
-```
+## 📕Iniciando projeto
 
 ```
-npx create-react-app blog-pessoal --template typescript 
+yarn start
 ```
+
 ---
 ### Instalação do Material UI
 ```
