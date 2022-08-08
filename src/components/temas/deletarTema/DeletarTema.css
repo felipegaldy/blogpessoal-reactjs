@@ -1,0 +1,19 @@
+.box-deletar-tema{
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.card-deletar-tema{
+    margin: 0 auto;
+    padding: 10px;
+}
+.box-botoes-tema{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botao-sim{
+    margin-right: 10px!important;
+}
+

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Grid, Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import './ListaPostagem.css';
 import useLocalStorage from 'react-use-localstorage';
 import { useNavigate } from 'react-router-dom';
@@ -37,9 +37,10 @@ function ListaPostagem() {
 
   return (
     <>
+    <Grid className='grid-container-posts' container spacing={3}>
     {
       postagens.map(postagem => (
-      <Box m={2} >
+      <Box m={2} className="box-card-post" >
         <Card variant="outlined"> 
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
@@ -47,7 +48,7 @@ function ListaPostagem() {
             </Typography>
             <Typography variant="h5" component="h2">
               {postagem.titulo}
-            </Typography>
+            </Typography> 
             <Typography variant="body2" component="p">
               {postagem.texto}
             </Typography>
@@ -56,18 +57,18 @@ function ListaPostagem() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Box display="flex" justifyContent="center" mb={1.5}>
+            <Box className='box-button' > 
 
               <Link to={`/formularioPostagem/${postagem.id}`} className="text-decorator-none" >
                 <Box mx={1}>
-                  <Button variant="contained" className="marginLeft" size='small' color="primary" >
+                  <Button variant="contained" className="botao-post botao-atualizar" size='small' color="primary" >
                     atualizar
                   </Button>
                 </Box>
               </Link>
               <Link to={`/deletarPostagem/${postagem.id}`} className="text-decorator-none">
                 <Box mx={1}>
-                  <Button variant="contained" size='small' color="secondary">
+                  <Button variant="contained" className='botao-post' size='small' color="secondary">
                     deletar
                   </Button>
                 </Box>
@@ -78,7 +79,9 @@ function ListaPostagem() {
       </Box>
       ))
       }
-    </>)
+    </Grid>
+    </>
+  );
 }
 
 export default ListaPostagem;
