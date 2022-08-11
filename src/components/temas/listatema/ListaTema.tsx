@@ -8,6 +8,7 @@ import { busca } from '../../../services/Service';
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaTema() {
 
@@ -19,7 +20,16 @@ function ListaTema() {
 
   React.useEffect(() => {
     if(token == ''){
-      alert("Você precisa estar logado para acessar essa página");
+      toast.info("Você precisa estar logado!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "dark",
+        progress: undefined,
+      });
       navigate('/login');
     }
   }, [token]);

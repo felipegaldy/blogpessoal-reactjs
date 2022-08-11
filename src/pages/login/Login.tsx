@@ -6,6 +6,7 @@ import UserLogin from "../../model/UserLogin";
 import { login } from "../../services/Service";
 import { useDispatch } from "react-redux";
 import { addToken } from "../../store/tokens/actions";
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -33,9 +34,27 @@ function Login() {
     e.preventDefault();
     try{
       await login(`/usuarios/logar`, userLogin, setToken);
-      alert ("Login realizado com sucesso!");
+      toast.success("Login realizado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "dark",
+        progress: undefined,
+      });;
     } catch(error){
-       alert('Dados do usuario incorretos!');
+      toast.error("Usuário ou senha incorretos", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "dark",
+        progress: undefined,
+      });;;
     }
   }
 

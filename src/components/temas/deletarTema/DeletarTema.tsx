@@ -5,51 +5,74 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
 import { buscaId, deleteId } from '../../../services/Service';
 import Tema from '../../../model/Tema';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 
 function DeletarTema() {
-  let navigate = useNavigate();
-  const { id } = useParams<{ id: string }>(); // id do tema a ser editado
-  const [token, setToken] = useLocalStorage("token");
 
-  const [tema, setTema] = useState<Tema>();
+  let navigate = useNavigate();
+  const { id } = useParams<{id: string}>();
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
+  const [tema, setTema] = useState<Tema>()
 
   useEffect(() => {
-    if(token == ""){
-        alert("Você precisa estar logado para acessar essa página");
-        navigate("/login");
-    }
-    }, [token]);
+      if (token == "") {
+        toast.error('Você precisa estar logado', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined,
+          });
+          navigate("/login")
+  
+      }
+  }, [token])
 
-    useEffect(() => {
-        if(id != undefined){
-            findById(id);
-        }
-    }, [id]);
+  useEffect(() =>{
+      if(id !== undefined){
+          findById(id)
+      }
+  }, [id])
 
-    const findById = async (id: string) => {
-        //adicionar try catch
-        buscaId(`/tema/${id}`, setTema, {
-            headers: {
-                'Authorization': token
-            }
+  async function findById(id: string) {
+      buscaId(`/tema/${id}`, setTema, {
+          headers: {
+            'Authorization': token
+          }
         })
-    };
+      }
 
-    const sim = () => {
-        navigate("/temas");
-        deleteId(`/tema/${id}`, {
+      function sim() {
+          navigate('/temas')
+          deleteId(`/tema/${id}`, {
             headers: {
-                'Authorization': token
+              'Authorization': token
             }
-        });
-        alert("Tema deletado com sucesso");
-    }
-    const nao = () => {
-        navigate("/temas");
-    }
-
+          });
+          toast.success('Tema deletado com sucesso', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+            });
+        }
+      
+        function nao() {
+          navigate('/temas')
+        }
           
   return (
     <>

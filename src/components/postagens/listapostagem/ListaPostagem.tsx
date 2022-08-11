@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { busca } from '../../../services/Service';
 import Postagem from '../../../model/Postagem';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaPostagem() {
 
@@ -18,7 +19,16 @@ function ListaPostagem() {
 
   React.useEffect(() => {
     if(token == ''){
-      alert("Você precisa estar logado para acessar essa página");
+      toast.info("Você precisa estar logado!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "dark",
+        progress: undefined,
+      });
       navigate('/login');
     }
   } , [token]);

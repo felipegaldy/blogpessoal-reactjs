@@ -12,6 +12,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useDispatch, useSelector } from "react-redux";
 import { TokenState } from "../../../store/tokens/tokensReducer";
 import { addToken } from "../../../store/tokens/actions";
+import { toast } from "react-toastify";
 
 function Navbar() {
 
@@ -23,6 +24,16 @@ function Navbar() {
 
   const logout = () => {
     dispatch(addToken(""));
+    toast.info("Logout efetuado com sucesso!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      theme: "dark",
+      progress: undefined,
+    });
     navigate("/login");
   }
 

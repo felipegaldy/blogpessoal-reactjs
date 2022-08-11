@@ -4,6 +4,7 @@ import { cadastroUsuario } from "../../services/Service";
 import "./CadastroUsuario.css";
 import { Link, useNavigate } from "react-router-dom";
 import User from "../../model/User";
+import { toast } from "react-toastify";
 
 function CadastroUsuario() {
   let navigate = useNavigate();
@@ -48,21 +49,56 @@ function CadastroUsuario() {
       //Tenta executar o cadastro
       try {
         await cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult);
-        alert("Usuário cadastrado com sucesso");
-
+        toast.success("Usuario cadastrado com sucesso", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined,
+        });
         //Se houver erro, pegue o Erro e retorna uma msg
       } catch (error) {
         console.log(`Error: ${error}`);
 
         //Pode modificar a msg de acordo com o erro
-        alert("Usuário já existente");
+        toast.error("Usuario já existente", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined,
+        });
       }
     } else if (confirmarSenha !== user.senha) {
-      alert("As senhas não combinam."); // Mensagem que indica que as senham nao são iguai
+      toast.error("As senhas não combinam", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+      }); // Mensagem que indica que as senham nao são iguai
 
       // Reinicia o campo de Confirmar Senha
     } else {
-      alert("Insira no miníno 8 caracteres na senha."); // Mensagem que indica a quantidade minima de caracteres
+      toast.error("A senha precisa ter no minimo 8 caracteres", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+      });; // Mensagem que indica a quantidade minima de caracteres
       setUser({ ...user, senha: "" }); // Reinicia o campo de Senha
       setConfirmarSenha("");
     }
