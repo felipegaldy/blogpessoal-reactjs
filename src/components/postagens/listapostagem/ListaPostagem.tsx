@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Grid, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { Box } from '@mui/material'
 import './ListaPostagem.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
